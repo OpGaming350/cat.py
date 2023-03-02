@@ -1,0 +1,5 @@
+{
+    "token": "your_bot_token",
+    "prefix": "!",
+    "allowed_users": [1234567890,1234567890]
+}
