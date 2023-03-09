@@ -56,8 +56,19 @@ async def unload(ctx, extension):
 @bot.command()
 @commands.check(is_allowed)
 async def reload(ctx, extension):
-    bot.reload_extension(f"cogs.{extension}")
-    await ctx.send("Reloaded Cogs")
+    try:
+        bot.reload_extension(f"cogs.{extension}")
+        await ctx.send("Reloaded Cogs")
+    except Exception as e:
+        # Print the error to console
+        print(f"Error reloading {extension} cog: {e}")
+        # Build the error message embed
+        embed = nextcord.Embed(
+            title=f"Error reloading {extension} cog",
+            description=f"```{traceback.format_exc()}```",
+            color=nextcord.Color.red()
+        )
+        await ctx.send(embed=embed)
 
 bot.run(TOKEN)
 
